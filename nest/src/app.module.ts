@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PostModule } from './post/post.module';
-
+import { PeopleModule } from './People/people.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -17,6 +17,7 @@ import { PostModule } from './post/post.module';
       synchronize: true,
     }),
     PostModule,
+    PeopleModule
   ],
   controllers: [AppController],
   providers: [AppService],
