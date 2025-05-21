@@ -7,7 +7,7 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { CreatePeopledto } from './create-people.dto';
+import { CreatePeopleDto } from './create-people.dto';
 import { PeopleService } from './people.service';
 import { UpdatePeopleDto } from './update-people.dto';
 
@@ -15,8 +15,8 @@ import { UpdatePeopleDto } from './update-people.dto';
 export class PeopleController{
     constructor(private readonly peopleService: PeopleService) {}
     @Post()
-    async create(@Body() createP: CreatePeopledto){
-      await this.peopleService.create(createP);
+    async create(@Body() createPeopleDto: CreatePeopleDto){
+      await this.peopleService.create(createPeopleDto);
       return {
         message: 'People created successfully'
       };
@@ -32,8 +32,8 @@ export class PeopleController{
       return await this.peopleService.findOne(+id); //+로 형변환
     }
     @Patch(':id')
-    async update(@Param('id') id: string){
-      await this.peopleService.update(+id, UpdatePeopleDto)
+    async update(@Param('id') id: string, @Body() updatePeopletDto: UpdatePeopleDto){
+      await this.peopleService.update(+id, updatePeopletDto)
       return {
         message: 'People updated successfully'
       };

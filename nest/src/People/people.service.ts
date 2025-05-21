@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { CreatePeopledto } from './create-people.dto';
+import { CreatePeopleDto } from './create-people.dto';
 import { DataSource, MongoNetworkError } from 'typeorm';
 import { UpdatePeopleDto } from './update-people.dto';
 
 @Injectable()
 export class PeopleService {
   constructor(private readonly dataSource: DataSource) {}
-  async create(createPeopledto: CreatePeopledto) {
+  async create(createPeopledto: CreatePeopleDto) {
       const people = this.dataSource.getRepository('people').create(createPeopledto);
       await this.dataSource.getRepository('people').save(people);
       return people;
@@ -29,14 +29,14 @@ export class PeopleService {
     return people;
   }
 
-  async update(id: number, UpdatePeopleDto: UpdatePeopleDto){
+  async update(id: number, updatePeopleDto: UpdatePeopleDto){
     const people = await this.dataSource.getRepository('people').findOne({
         where: { id }
     });
     if(!people) {
         throw new Error(`People with id ${id} not found`);
     }
-    Object.assign(people, UpdatePeopleDto);
+    Object.assign(people, updatePeopleDto);
     await this.dataSource.getRepository('people').save(people);
     return people;
   }

@@ -1,5 +1,4 @@
-export class CreatePeopledto{
-  id: number;
+export class CreatePeopleDto{
   name: string;
   age: number;
 }
